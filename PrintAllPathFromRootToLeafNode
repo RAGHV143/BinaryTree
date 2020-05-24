@@ -1,0 +1,74 @@
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
+public class AllPathFromRootToLeafNode {
+	public static void fun(Node root,List<Integer>list){
+		if(root==null){
+			return ;
+		}
+		list.add(root.data);
+		//System.out.println(list);
+		if(root.left==null && root.right==null){
+			System.out.println(list);
+			list.remove(new Integer(root.data));
+			return;
+		}
+		fun(root.left,list);
+		fun(root.right,list);
+		list.remove(new Integer(root.data));
+		return ;
+	}
+	
+	public static void main(String[] args) {
+		Node root = null;
+		CreateBinaryTree2  obj = new CreateBinaryTree2();
+		int arr[]={10,5,4,8,12,14};
+		root=obj.Insertt(root,arr[0]);
+		for(int i=1;i<arr.length;i++){
+			obj.Insertt(root, arr[i]);
+		}
+		System.out.println("\n**********");
+		List<Integer> list = new LinkedList<Integer>();
+		
+		 
+		
+	   fun(root,list);
+		
+	}
+
+}
+public  Node Insertt(Node root,int value){
+		if(root==null){
+			root = new Node(value);
+			//System.out.print(node.data+" ");
+			return root; 
+		}
+		
+			if(root.data>value)
+			{
+				root.left=Insertt(root.left,value);
+					//System.out.println("node_left="+node.data+"value="+value);
+			}
+			else{
+				root.right=Insertt(root.right,value);
+					//System.out.println("node_right="+node.data+"value="+value);
+				}
+			return root;
+			 
+			
+		
+		
+	}
+  
+public class Node {
+	Node left;
+	Node right;
+	int data;
+	Node(int x){
+		left = null;
+		right = null;
+		data = x;
+	}
+}
